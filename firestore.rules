@@ -1,0 +1,106 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function getUserRole() {
+      return request.auth.token.role;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && (getUserRole() == 'ADMIN' || getUserRole() == 'SUPER_ADMIN');
+    }
+    
+    function isStaff() {
+      return isAuthenticated() && (
+        getUserRole() == 'ADMIN' || 
+        getUserRole() == 'SUPER_ADMIN' || 
+        getUserRole() == 'TECHNICIAN' || 
+        getUserRole() == 'ACCOUNTANT'
+      );
+    }
+
+    // 1. Service Requests
+    match /serviceRequests/{requestId} {
+      // Public customers can submit a new request
+      allow create: if request.resource.data.status == 'NEW'
+                    && request.resource.data.source == 'WEBSITE'
+                    && request.resource.data.customerInfo.name is string
+                    && request.resource.data.customerInfo.phone is string;
+                    
+      // Public customer can read ONLY with valid secure token matching document
+      allow get: if (request.query.token != null && resource.data.secureToken == request.query.token)
+                 || isStaff();
+                 
+      // List requests: Staff only
+      allow list: if isStaff();
+      
+      // Update: Staff only (status changes, technician assignment)
+      allow update, delete: if isStaff();
+    }
+
+    // 2. Quotes / Proposals
+    match /quotes/{quoteId} {
+      // Public customer can read quote if sent
+      allow get: if resource.data.status in ['SENT', 'ACCEPTED', 'REVISION_REQUESTED', 'DECLINED']
+                 || isStaff();
+      allow list: if isStaff();
+      
+      // Customer can submit decision on their quote
+      allow update: if (
+        resource.data.status == 'SENT' &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'customerDecision', 'approvedAt', 'approvedBy', 'clientNotes']) &&
+        request.resource.data.status in ['ACCEPTED', 'REVISION_REQUESTED', 'DECLINED']
+      ) || isAdmin();
+      
+      allow create, delete: if isAdmin();
+    }
+
+    // 3. Invoices
+    match /invoices/{invoiceId} {
+      // Public customer can view their invoice
+      allow get: if true;
+      allow list: if isStaff();
+      
+      // Customers CANNOT mark invoices as paid directly!
+      // Invoices must only be updated by authorized Cloud Functions or Accounting/Admin staff
+      allow update: if isStaff();
+      allow create, delete: if isAdmin() || (isAuthenticated() && getUserRole() == 'ACCOUNTANT');
+    }
+
+    // 4. Products & Services Catalog
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 5. Work Orders, Tasks & Appointments (Internal Operations)
+    match /workOrders/{workOrderId} {
+      allow read, write: if isStaff();
+    }
+    
+    match /tasks/{taskId} {
+      allow read, write: if isStaff();
+    }
+    
+    match /appointments/{appointmentId} {
+      allow read, write: if isStaff();
+    }
+
+    // 6. Audit Trail & System Logs (Immutable append-only)
+    match /auditLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isStaff();
+      allow update, delete: if false; // Immutable!
+    }
+  }
+}

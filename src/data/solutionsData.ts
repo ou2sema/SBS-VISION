@@ -1,0 +1,108 @@
+import { IndustrySolution } from '../types/customerWebsite';
+
+export const INDUSTRY_SOLUTIONS: IndustrySolution[] = [
+  {
+    id: 'sol-commercial-office',
+    title: 'Commercial Offices & Corporate HQ',
+    slug: 'commercial-offices',
+    tagline: 'Streamlined access control, conference room networking, and perimeter surveillance.',
+    icon: 'Building2',
+    description: 'Modern corporate offices demand reliable high-speed wireless connectivity for hybrid work, touchless biometric entry for employee access, and unobtrusive 4K camera monitoring across reception lobbies and server infrastructure.',
+    challengesSolved: [
+      'Eliminating Wi-Fi dead spots during executive video calls',
+      'Automated time attendance integration with HR payroll',
+      'Preventing unauthorized visitors in confidential engineering areas',
+      'Unified single-pane management for IT administrators',
+    ],
+    recommendedServices: [
+      'Access Control & Time Attendance',
+      'Enterprise Structured Cabling & Networking',
+      'Commercial Wi-Fi & Mesh Access Points',
+      'CCTV & IP Camera Installation',
+    ],
+    recommendedHardware: [
+      'FacePass Touchless Biometric Terminal',
+      'UniFi 6 Pro Access Points',
+      'NetEdge 24-Port Managed PoE Switch',
+    ],
+    caseStudyHighlight: 'Equipped a 3-floor financial services hub with 12 biometric access doors, 32 4K dome cameras, and 10Gbps fiber backbone with 99.99% uptime.',
+  },
+  {
+    id: 'sol-logistics-warehouse',
+    title: 'Industrial Warehouses & Logistics Yards',
+    slug: 'warehouses-logistics',
+    tagline: 'High-bay optical zoom, perimeter tripwire lasers, and ruggedized outdoor antennas.',
+    icon: 'Warehouse',
+    description: 'Expansive storage facilities present unique physical challenges: extreme dust, metal racking that obstructs radio signals, high ceilings, and sensitive loading bays prone to inventory discrepancies.',
+    challengesSolved: [
+      'Long-distance perimeter coverage without blind spots',
+      'License plate recognition (ANPR) at truck entry gates',
+      'Dustproof and waterproof IP67 camera enclosures',
+      'Full outdoor Wi-Fi coverage for barcode handheld scanners',
+    ],
+    recommendedServices: [
+      'CCTV & IP Camera Installation',
+      'Intrusion & Anti-Burglary Alarm Systems',
+      'Commercial Wi-Fi & Mesh Access Points',
+      'Preventative Maintenance & Troubleshooting',
+    ],
+    recommendedHardware: [
+      'SecurVision 4K ColorVu Cameras',
+      'ProRecord 16-Channel NVR',
+      'Ajax Hub 2 Plus Advanced Alarm Panel',
+    ],
+    caseStudyHighlight: 'Installed 48-camera multi-building surveillance across a 12,000m² logistics park in Gabès, integrating automated motion strobe alarms at night.',
+  },
+  {
+    id: 'sol-residential-villas',
+    title: 'Luxury Residential Villas & Estates',
+    slug: 'residential-villas',
+    tagline: 'Aesthetic architectural concealment, perimeter sensors, and whole-home seamless Wi-Fi.',
+    icon: 'Home',
+    description: 'Discreet security that blends into architectural finishes. We configure boundary laser barriers, garden illumination triggers, whole-home audio-visual cabling, and high-speed Wi-Fi that penetrates thick stone walls.',
+    challengesSolved: [
+      'Invisible cable runs with zero unsightly surface trunking',
+      'Preventing false alarms caused by garden pets and wind',
+      'Instant mobile alerts and door gate phone intercom',
+      'Guaranteed coverage from the basement cinema to the swimming pool',
+    ],
+    recommendedServices: [
+      'CCTV & IP Camera Installation',
+      'Intrusion & Anti-Burglary Alarm Systems',
+      'Commercial Wi-Fi & Mesh Access Points',
+      'Hospitality IPTV & Satellite Distribution',
+    ],
+    recommendedHardware: [
+      'SecurVision 4K ColorVu AI Dome',
+      'Ajax Hub 2 Plus Wireless System',
+      'UniFi 6 Pro Access Points',
+    ],
+    caseStudyHighlight: 'Turnkey security installation for an 800m² private residence, including 16 concealed cameras, exterior microwave beam detectors, and fiber internet distribution.',
+  },
+  {
+    id: 'sol-retail-hospitality',
+    title: 'Retail Stores, Boutique Hotels & Clinics',
+    slug: 'retail-clinics-hospitality',
+    tagline: 'Cashier angle surveillance, branded guest Wi-Fi, and patient access partitions.',
+    icon: 'ShoppingBag',
+    description: 'Balance welcoming customer hospitality with strict loss prevention and compliance. We deliver branded captive Wi-Fi portals, high-resolution cash drawer cameras, and quiet access control for medical consultation suites.',
+    challengesSolved: [
+      'Loss prevention and cashier dispute resolution with crystal-clear audio',
+      'Compliant guest Wi-Fi data protection with legal traffic isolation',
+      'Single centralized TV distribution across all patient or guest rooms',
+      'Emergency nurse-call and staff panic alarms',
+    ],
+    recommendedServices: [
+      'CCTV & IP Camera Installation',
+      'Access Control & Time Attendance',
+      'Hospitality IPTV & Satellite Distribution',
+      'Commercial Wi-Fi & Mesh Access Points',
+    ],
+    recommendedHardware: [
+      'SecurVision 4K Dome Camera',
+      'FacePass Biometric Terminal',
+      'UniFi 6 Pro Ceiling AP',
+    ],
+    caseStudyHighlight: 'Fitted Clinique El Amen with medical ward access doors, centralized IPTV headend, and 24-camera monitoring compliant with national health security norms.',
+  },
+];

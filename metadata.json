@@ -1,0 +1,6 @@
+{
+  "name": "SecurOps Field Service & Workflow Engine",
+  "description": "Production-grade workflow-driven operations app for security & technology installation teams, managing end-to-end work orders from request to customer sign-off.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
